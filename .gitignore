@@ -1,0 +1,28 @@
+# Visual Studio cache and build files
+*.suo
+*.user
+*.cache
+*.pdb
+*.dll
+bin/
+obj/
+
+# Vue.js cache and build files
+node_modules/
+/dist/
+/.cache/
+
+# Other Visual Studio files and folders
+.vs/
+*.csproj.user
+*.csproj.vspscc
+*.sln
+*.csproj
+
+# TypeScript configuration files
+*.tsconfig.json
+
+# Other auto-generated files
+*.log
+Thumbs.db
+Desktop.ini

@@ -16,8 +16,7 @@ node_modules/
 .vs/
 *.csproj.user
 *.csproj.vspscc
-*.sln
-*.csproj
+
 
 # TypeScript configuration files
 *.tsconfig.json

@@ -25,4 +25,16 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Fixtures\" />
+    <Folder Include="Tests\Api\" />
+    <Folder Include="Tests\Business\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TodoCrud.Api\TodoCrud.Api.csproj" />
+    <ProjectReference Include="..\TodoCrud.Business\TodoCrud.Business.csproj" />
+    <ProjectReference Include="..\TodoCrud.Data\TodoCrud.Data.csproj" />
+  </ItemGroup>
+
 </Project>

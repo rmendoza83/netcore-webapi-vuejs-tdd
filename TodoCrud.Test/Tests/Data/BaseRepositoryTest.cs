@@ -1,20 +1,14 @@
 ﻿namespace TodoCrud.Test.Tests.Data;
 
-using System.Collections.Generic;
-using System.Linq;
 using AutoFixture;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Moq;
 using TodoCrud.Data;
 using TodoCrud.Data.Models;
 using TodoCrud.Data.Repositories;
 using TodoCrud.Test.Helpers.Data;
 using Xunit;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public abstract class BaseRepositoryTest<T> where T : class, IEntity, new()
 {

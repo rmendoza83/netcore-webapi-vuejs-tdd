@@ -1,4 +1,7 @@
-﻿using TodoCrud.Api.Extensions;
+﻿using AutoFixture;
+using TodoCrud.Api.Extensions;
+using TodoCrud.Data;
+using TodoCrud.Data.Models;
 
 namespace TodoCrud.Api;
 
@@ -25,13 +28,15 @@ public class Startup
         services.AddServices();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext dbContext)
     {
         // Configure the HTTP request pipeline.
         if (env.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+            dbContext.Database.EnsureCreated();
+            SeedDatabase(dbContext);
         }
         else
         {
@@ -59,5 +64,29 @@ public class Startup
                 }
             });
         }
+    }
+
+    private void SeedDatabase(DatabaseContext dbContext)
+    {
+        var todos = dbContext.Todos;
+
+        // Check if the Todos table is already populated
+        if (todos.Any())
+        {
+            todos.RemoveRange(todos.ToArray()); // Empty the data
+            dbContext.SaveChanges();
+        }
+
+        var faker = new Fixture();
+        var todoEntities = faker.Build<Todo>()
+            .Without(x => x.Id) // Exclude the Id property from auto-generation
+            .Do(x => x.Id = faker.Create<Guid>())
+            //.With(x => x.Id, faker.Create<Guid>())
+            .CreateMany(100)
+            .ToArray();
+
+        // Add the Todos to the database
+        todos.AddRange(todoEntities);
+        dbContext.SaveChanges();
     }
 }

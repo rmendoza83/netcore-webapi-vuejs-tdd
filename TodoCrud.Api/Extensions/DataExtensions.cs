@@ -16,7 +16,7 @@ public static class DataExtensions
 
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
-        services.AddScoped<IBaseRepository<Todo>, TodoRepository>();
+        services.AddScoped<TodoRepository>();
 
         return services;
     }

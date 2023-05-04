@@ -20,6 +20,7 @@ public class Startup
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
+        services.AddDatabaseContext();
         services.AddRepositories();
         services.AddServices();
     }

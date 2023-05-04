@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -26,14 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fixtures\" />
-    <Folder Include="Tests\Api\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TodoCrud.Api\TodoCrud.Api.csproj" />
     <ProjectReference Include="..\TodoCrud.Business\TodoCrud.Business.csproj" />
     <ProjectReference Include="..\TodoCrud.Data\TodoCrud.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Fixtures\" />
   </ItemGroup>
 
 </Project>

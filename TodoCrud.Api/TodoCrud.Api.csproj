@@ -20,4 +20,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TodoCrud.Business\TodoCrud.Business.csproj" />
+    <ProjectReference Include="..\TodoCrud.Data\TodoCrud.Data.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace TodoCrud.Api;
+﻿using TodoCrud.Api.Extensions;
+
+namespace TodoCrud.Api;
 
 public class Startup
 {
@@ -17,6 +19,9 @@ public class Startup
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+
+        services.AddRepositories();
+        services.AddServices();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

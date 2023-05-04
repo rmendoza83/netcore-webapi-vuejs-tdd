@@ -10,29 +10,29 @@ using TodoCrud.Data.Repositories;
 using TodoCrud.Test.Helpers.Data;
 using Xunit;
 
-public abstract class BaseRepositoryTest<T> where T : class, IEntity, new()
+public abstract class BaseRepositoryTest<TEntity> where TEntity : class, IEntity, new()
 {
-    protected abstract IBaseRepository<T> GetSystemUnderTest(DatabaseContext context);
+    protected abstract IBaseRepository<TEntity> GetSystemUnderTest(DatabaseContext context);
 
     [Fact]
     public async void GetAll_ShouldReturnAllEntitiesAsync()
     {
         // Arrange
         var faker = new Fixture();
-        var entities = faker.Build<T>()
+        var entities = faker.Build<TEntity>()
             .CreateMany(10)
             .ToList();
         var mockDbContext = new Mock<DatabaseContext>();
         var mockDbSet = DataHelper.GetQueryableMockDbSet(entities);
 
         mockDbContext
-            .Setup(x => x.Set<T>())
+            .Setup(x => x.Set<TEntity>())
             .Returns(mockDbSet);
 
-        var repository = GetSystemUnderTest(mockDbContext.Object);
+        var sut = GetSystemUnderTest(mockDbContext.Object);
 
         // Act
-        var result = await repository.GetAllAsync();
+        var result = await sut.GetAllAsync();
 
         // Assert
         result.Should().BeEquivalentTo(entities);
@@ -44,20 +44,20 @@ public abstract class BaseRepositoryTest<T> where T : class, IEntity, new()
         // Arrange
         var faker = new Fixture();
         var entityId = faker.Create<Guid>();
-        var entity = faker.Build<T>()
+        var entity = faker.Build<TEntity>()
             .With(x => x.Id, entityId)
             .Create();
 
         var mockDbContext = new Mock<DatabaseContext>();
 
         mockDbContext
-            .Setup(x => x.Set<T>().FindAsync(entityId))
+            .Setup(x => x.Set<TEntity>().FindAsync(entityId))
             .ReturnsAsync(entity);
 
-        var repository = GetSystemUnderTest(mockDbContext.Object);
+        var sut = GetSystemUnderTest(mockDbContext.Object);
 
         // Act
-        var result = await repository.GetByIdAsync(entityId);
+        var result = await sut.GetByIdAsync(entityId);
 
         // Assert
         result.Should().BeEquivalentTo(entity);
@@ -69,25 +69,25 @@ public abstract class BaseRepositoryTest<T> where T : class, IEntity, new()
         // Arrange
         var faker = new Fixture();
         var entityId = faker.Create<Guid>();
-        var entity = faker.Build<T>()
+        var entity = faker.Build<TEntity>()
             .With(x => x.Id, entityId)
             .Create();
 
         var mockDbContext = new Mock<DatabaseContext>();
-        var mockDbSet = new Mock<DbSet<T>>();
+        var mockDbSet = new Mock<DbSet<TEntity>>();
 
         mockDbContext
-            .Setup(x => x.Set<T>())
+            .Setup(x => x.Set<TEntity>())
             .Returns(mockDbSet.Object);
 
-        var repository = GetSystemUnderTest(mockDbContext.Object);
+        var sut = GetSystemUnderTest(mockDbContext.Object);
 
         // Act
-        await repository.InsertAsync(entity);
+        await sut.InsertAsync(entity);
 
         // Assert
         mockDbContext.Verify(
-            x => x.Set<T>().AddAsync(entity, default),
+            x => x.Set<TEntity>().AddAsync(entity, default),
             Times.Once());
         mockDbContext.Verify(
             x => x.SaveChangesAsync(default),
@@ -100,17 +100,17 @@ public abstract class BaseRepositoryTest<T> where T : class, IEntity, new()
         // Arrange
         var faker = new Fixture();
         var entityId = faker.Create<Guid>();
-        var entity = faker.Build<T>()
+        var entity = faker.Build<TEntity>()
             .With(x => x.Id, entityId)
             .Create();
 
         var mockDbContext = new Mock<DatabaseContext>();
         mockDbContext.Setup(x => x.SetModified(entity));
 
-        var repository = GetSystemUnderTest(mockDbContext.Object);
+        var sut = GetSystemUnderTest(mockDbContext.Object);
 
         // Act
-        await repository.UpdateAsync(entity);
+        await sut.UpdateAsync(entity);
 
         // Assert
         mockDbContext.Verify(
@@ -124,24 +124,24 @@ public abstract class BaseRepositoryTest<T> where T : class, IEntity, new()
         // Arrange
         var faker = new Fixture();
         var entityId = faker.Create<Guid>();
-        var entity = faker.Build<T>()
+        var entity = faker.Build<TEntity>()
             .With(x => x.Id, entityId)
             .Create();
 
         var mockDbContext = new Mock<DatabaseContext>();
 
         mockDbContext
-            .Setup(x => x.Set<T>().FindAsync(entityId))
+            .Setup(x => x.Set<TEntity>().FindAsync(entityId))
             .ReturnsAsync(entity);
 
-        var repository = GetSystemUnderTest(mockDbContext.Object);
+        var sut = GetSystemUnderTest(mockDbContext.Object);
 
         // Act
-        await repository.DeleteAsync(entityId);
+        await sut.DeleteAsync(entityId);
 
         // Assert
         mockDbContext.Verify(
-            x => x.Set<T>().Remove(entity),
+            x => x.Set<TEntity>().Remove(entity),
             Times.Once());
         mockDbContext.Verify(
             x => x.SaveChangesAsync(default),

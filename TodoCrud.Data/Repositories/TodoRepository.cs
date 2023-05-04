@@ -1,6 +1,5 @@
 ﻿namespace TodoCrud.Data.Repositories;
 
-using Microsoft.EntityFrameworkCore;
 using TodoCrud.Data.Models;
 
 public class TodoRepository : BaseRepository<Todo>

@@ -39,12 +39,17 @@ npm install
 
 ## Usage
 
-1. Run the project:
+1. Run the backend project:
+```bash
+dotnet run --project TodoCrud.Api/TodoCrud.Api.cproj
+```
+
+2. Run the frontend project:
 ```bash
 npm run dev
 ```
 
-2. Open a web browser and navigate to `https://localhost:5000`
+3. Open a web browser and navigate to `https://localhost:5000`
 
 # License
 

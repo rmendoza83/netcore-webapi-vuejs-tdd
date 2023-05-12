@@ -62,7 +62,7 @@
       </template>
     </Dialog>
     <ConfirmDialog />
-    <Toast position="bottom-right" group="br" />
+    <Toast position="bottom-right" />
   </div>
 </template>
 

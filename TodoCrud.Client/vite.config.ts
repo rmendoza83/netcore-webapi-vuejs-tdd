@@ -23,7 +23,11 @@ export default defineConfig({
       {
         find: /~(.+)/,
         replacement: `${process.cwd()}/node_modules/$1`,
-      }
+      },
+      {
+        find: "vue",
+        replacement: "vue/dist/vue.esm-bundler",
+      },
     ]
   },
   server: {

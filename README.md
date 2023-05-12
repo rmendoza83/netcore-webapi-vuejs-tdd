@@ -39,18 +39,12 @@ npm install
 
 ## Usage
 
-1. Configure the frontend project:
-```bash
-cd TodoCrud.Client
-npm install
-```
-
-2. Run the project:
+1. Run the project:
 ```bash
 npm run dev
 ```
 
-3. Open a web browser and navigate to `https://localhost:5000`
+2. Open a web browser and navigate to `https://localhost:5000`
 
 # License
 

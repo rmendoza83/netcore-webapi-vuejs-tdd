@@ -143,7 +143,7 @@ export default class TodoComponent extends Vue {
           this.toastService.add({
             severity: 'success',
             summary: 'Confirmed',
-            detail: 'Record deleted',
+            detail: 'Record Added',
             life: 3000
           });
           this.getListData();
@@ -227,10 +227,5 @@ export default class TodoComponent extends Vue {
 .action-button {
   width: 135px;
   margin-left: 10px !important;
-}
-
-::v-deep(.editable-cells-table td.p-cell-editing) {
-    padding-top: 0.6rem;
-    padding-bottom: 0.6rem;
 }
 </style>

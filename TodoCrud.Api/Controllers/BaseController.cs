@@ -23,6 +23,7 @@ public abstract class BaseController<TEntity> : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ActionName(nameof(GetByIdAsync))]
     public async Task<ActionResult<TEntity>> GetByIdAsync(Guid id)
     {
         try

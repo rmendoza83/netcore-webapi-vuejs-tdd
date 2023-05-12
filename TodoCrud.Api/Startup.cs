@@ -26,6 +26,15 @@ public class Startup
         services.AddDatabaseContext();
         services.AddRepositories();
         services.AddServices();
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext dbContext)
@@ -46,6 +55,7 @@ public class Startup
 
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseCors("AllowAll");
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
